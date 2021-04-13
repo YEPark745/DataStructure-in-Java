@@ -1,0 +1,88 @@
+package DS_Ex6;
+
+import java.util.Scanner;
+
+
+
+	public class MyStack_Demo {
+
+		public static void main(String[] args) {
+			// TODO Auto-generated method stub
+			Scanner in=new Scanner(System.in);
+			MyStack st=new MyStack();
+			boolean exit=true;
+			System.out.print("Menu: 1-Push 2-Pop 3-Peek 4-Show 5-Search 6-Exit\n");
+			do {
+				System.out.print("Enter your choice: ");
+				int choice=in.nextInt();
+				switch(choice) {
+				case 1:System.out.print("Enter the number to push: ");
+					st.push(in.nextInt());
+					break;
+				case 2: st.pop(); 
+					break;
+//				case 3:st.peek();
+//					break;
+				case 4: st.show();
+					break;
+				case 5: st.search();
+					break;
+				default:exit=!exit;
+				}
+			} while(exit);
+		}
+
+	}
+
+
+package DS_Ex6;
+
+public class MyStack {
+	int capacity=2;
+	int s[]=new int[capacity];
+	int top=0;
+	void push(int val) {//to add to top position
+		if(isfull()) {//expanding stack
+			int temp[]=new int[capacity*2];
+			for(int i=0;i<capacity;i++) temp[i]=s[i];//copying elements
+			capacity*=2;
+			s=temp;
+		}
+		s[top]=val;
+		top++;
+	}
+	void pop() {
+		if(!isempty()) {
+			top--;
+			s[top]=0;
+		}
+		else System.out.println("Can't pop, Stack is empty.");
+		if(top<capacity/4) {//shrinking stack
+			capacity/=2;
+			int temp[]=new int[capacity];
+			for(int i=0;i<capacity;i++) temp[i]=s[i];
+			s=temp;
+		}
+	}
+	void peek() {//to display last value
+		if(!isempty()) System.out.println(s[top-1]);
+		else System.out.println("No data to show, Stack is empty.");
+	}
+	void show() {
+		if(!isempty()) for(int i:s) System.out.print(i+" ");
+		else System.out.println("No data to show, Stack is empty.");
+	}
+	void search() {
+		if(!isempty()) for(int i:s) 
+		else System.out.println("Value not found.");
+		
+	}
+	boolean isfull() {
+		if(top==capacity)return true;
+		else return false;
+	} 
+	boolean isempty() {
+		if(top<=0) return true;
+		else return false;
+	}
+}
